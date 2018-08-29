@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "Clones.h"
 
 int main(int argc, char* argv[])
 {

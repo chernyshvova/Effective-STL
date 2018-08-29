@@ -1,3 +1,4 @@
 #pragma once
+#include <list>
 
-void test();
+std::list<char> CreateClones(const std::list<char>& initialSoldiersSquad, size_t requestedArmySize);
