@@ -32,6 +32,7 @@ std::list<char> CreateClones( std::list<char>& initialSoldiersSquad, size_t requ
         initialSoldiersSquad.push_back(*centralSoldier);
         initialSoldiersSquad.push_front(*centralSoldier);
         rightSoldier++;
+        armyDiff-=2;
     }
 
     leftSoldier--;
@@ -39,10 +40,19 @@ std::list<char> CreateClones( std::list<char>& initialSoldiersSquad, size_t requ
     bool rightFlag = true;
     for (int i = 0; i < armyDiff; ++i)
     {
-        rightFlag ? initialSoldiersSquad.push_back(*rightSoldier) : initialSoldiersSquad.push_front(*leftSoldier);
+        if (rightFlag)
+        {
+            initialSoldiersSquad.push_back(*rightSoldier);
+            rightSoldier++;
+        }
+        else
+        {
+            initialSoldiersSquad.push_front(*leftSoldier);
+            leftSoldier--;
+        }
+
         rightFlag = !rightFlag;
     }
-
 
     return initialSoldiersSquad;
 }

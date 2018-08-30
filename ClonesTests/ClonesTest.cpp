@@ -14,14 +14,6 @@ TEST(CLONES, INPUTWRONGSIZEANDRETURNEXEPTION)
     EXPECT_THROW(CreateClones(initialSoldiersSquad, 1), std::exception);
 }
 
-TEST(CLONES, CLONE_UNEVEN_ONE_TIME)
-{
-    std::list<char> initialSoldiersSquad{ 'A', 'B', 'C' };      //ABC 
-    std::list<char> expectSoldierSquad{ 'A','B', 'A', 'B', 'C', 'B', 'C' };//ABABCBC 
-
-    EXPECT_EQ(expectSoldierSquad, CreateClones(initialSoldiersSquad, 5));
-}
-
 TEST(CLONES, CLONE_EVEN_ONE_TIME)
 {
     std::list<char> initialSoldiersSquad{ 'A', 'B' };      //AB
@@ -30,9 +22,9 @@ TEST(CLONES, CLONE_EVEN_ONE_TIME)
     EXPECT_EQ(expectSoldierSquad, CreateClones(initialSoldiersSquad, 4));
 }
 
-TEST(CLONES, CLONE_EVEN_MANY_TIMES)
+TEST(CLONES, CLONE_UNEVEN_MANY_TIMES)
 {
-    std::list<char> initialSoldiersSquad{ 'A', 'B' };      //AB
+    std::list<char> initialSoldiersSquad{ 'A', 'B', 'C' };      //AB
     std::list<char> expectSoldierSquad{ 'A','B','A','B','A','B','C','B','C','B','C' };//ABABABCBCBC 
-    EXPECT_EQ(expectSoldierSquad, CreateClones(initialSoldiersSquad, 10));
+    EXPECT_EQ(expectSoldierSquad, CreateClones(initialSoldiersSquad, 11));
 }
