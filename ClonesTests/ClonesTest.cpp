@@ -24,7 +24,7 @@ TEST(CLONES, CLONE_EVEN_ONE_TIME)
 
 TEST(CLONES, CLONE_UNEVEN_MANY_TIMES)
 {
-    std::list<char> initialSoldiersSquad{ 'A', 'B', 'C' };      //AB
+    std::list<char> initialSoldiersSquad{ 'A', 'B', 'C' };      //ABC
     std::list<char> expectSoldierSquad{ 'A','B','A','B','A','B','C','B','C','B','C' };//ABABABCBCBC 
     EXPECT_EQ(expectSoldierSquad, CreateClones(initialSoldiersSquad, 11));
 }
