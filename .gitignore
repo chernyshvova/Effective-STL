@@ -29,3 +29,11 @@ ipch
 /StarWars/x64/Debug
 /x64/Debug
 /Debug
+/AttackPreparing/Debug
+/AttackPreparing/Release
+/AttackPreparingTests/Debug
+/AttackPreparingTests/Release
+/packages/Microsoft.googletest.v140.windesktop.msvcstl.dyn.rt-dyn.1.8.0
+/AttackPreparingTests/AttackPreparingTests.vcxproj.filters
+*.vcxproj
+*.filters
