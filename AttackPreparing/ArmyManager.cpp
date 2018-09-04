@@ -41,3 +41,30 @@ Army CreateArmy()
     std::transform(army.begin(), army.end(), army.begin(), FillCreateArmy);
     return army;
 }
+
+Column CreateColumn(Army& army, const size_t rankCount)
+{
+    if (army.empty())
+    {
+        throw std::exception();
+    }
+
+    Column result;
+
+    for (int i = 0, j=0; i*10 +j < rankCount; ++j)
+    {
+
+        result.insert(result.begin(),std::make_move_iterator(std::begin(army[i][j])),
+            std::make_move_iterator(std::end(army[i][j])));
+
+        army[i][j].erase(army[i][j].begin(), army[i][j].end());
+
+        if (j >= army[i].size() - 1)
+        {
+            j = 0;
+            i++;
+        }
+
+    }
+    return result;
+}
