@@ -35,5 +35,3 @@ ipch
 /AttackPreparingTests/Release
 /packages/Microsoft.googletest.v140.windesktop.msvcstl.dyn.rt-dyn.1.8.0
 /AttackPreparingTests/AttackPreparingTests.vcxproj.filters
-*.vcxproj
-*.filters
