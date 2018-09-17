@@ -3,8 +3,8 @@
 
 
 using Rank = std::list<char>;
-using Squad = std::vector<Rank>;
-using Army = std::vector<Squad>;
+using Squad = std::list<Rank>;
+using Army = std::list<Squad>;
 using Column = std::vector<char>;
 
 
