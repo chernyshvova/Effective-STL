@@ -7,7 +7,6 @@ using Squad = std::list<Rank>;
 using Army = std::list<Squad>;
 using Column = std::vector<char>;
 
-
 Rank CreateRank();
 Squad CreateSquad();
 Army CreateArmy();
@@ -16,4 +15,6 @@ Column CreateColumn(Army& army, const size_t columnVolume);
 namespace details
 {
     const size_t g_rankCount = 20;
+    const size_t g_squadCount = 200;
+    const size_t g_rankCountInArmy = 2000;
 }

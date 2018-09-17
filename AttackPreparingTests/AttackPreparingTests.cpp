@@ -30,7 +30,7 @@ TEST(ArmyManager, CreateColumnWithoutArmy)
 TEST(ArmyManager, CreateColumnWithCorrectArmy)
 {
     Army army = CreateArmy();
-    std::string expectStr = { "ABABABABABCBCBCBCBCB" };
+    std::string expectStr = { "BABABCBCBC" };
     std::vector<char> expect(expectStr.begin(), expectStr.end());
     Column result = CreateColumn(army, 1);
     EXPECT_EQ(expect, result);
@@ -41,16 +41,15 @@ TEST(ArmyManager, CreateColumnWuth10SquadsWithCorrectArmy)
 {
     Army army = CreateArmy();
     Column result = CreateColumn(army, 11);
-    EXPECT_EQ(11, army.begin()->size());
+    EXPECT_EQ(details::g_rankCount * 11, result.size());
+    EXPECT_EQ(199, army.size());
 }
 
-//TEST(ArmyManager, CreateColumnManyTimes)
-//{
-//    Army army = CreateArmy();
-//    for (int i = 0; i <200; ++i)
-//    {
-//        CreateColumn(army, 50);
-//    }
-//    
-//    EXPECT_EQ(0, army.size());
-//}
+TEST(ArmyManager, CreateColumnManyTimes)
+{
+    Army army = CreateArmy();
+
+    CreateColumn(army, details::g_rankCountInArmy);
+    
+    EXPECT_EQ(0, army.size());
+}

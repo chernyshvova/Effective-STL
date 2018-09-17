@@ -4,8 +4,8 @@
 
 namespace
 {
-    const size_t g_rankSize = 20;
-    const size_t g_solderSize = 10;
+    const size_t g_rankSize = 10;
+    const size_t g_solderSize = 20;
     const size_t g_squadSize = 200;
 
     const Rank& FillCreateSquad(Rank& rank)
@@ -43,11 +43,6 @@ Army CreateArmy()
     return army;
 }
 
-//void PopRank(Column& col, Army& arm)
-//{
-//
-//}
-
 Column CreateColumn(Army& army, const size_t rankCount)
 {
     if (army.empty())
@@ -58,39 +53,24 @@ Column CreateColumn(Army& army, const size_t rankCount)
     size_t count = rankCount;
     Column result;
 
-    //while (count)
-    //{
-    //    count --;
-    //    result.insert(result.begin(), std::make_move_iterator(std::begin(army.begin()->pop_back())),
-    //        std::make_move_iterator(std::end(army[0][0])));
-    //    army[0].erase(army[0].begin());
-
-    //    if (army[0].empty())
-    //    {
-    //        army.erase(army.begin());
-    //    }
-    //}
-    
-
-/*
-    for (int i = 0, j=0; i*10 +j < rankCount; ++j)
+    while (count)
     {
+        count --;
 
-        result.insert(result.begin(),std::make_move_iterator(std::begin(army[i][j])),
-            std::make_move_iterator(std::end(army[i][j])));
-        
-        army[i].erase(army[i].begin());
+        auto squadIterator = army.begin();
+        auto rankIterator = squadIterator->begin();
 
-        if (army[i].empty())
+
+        result.insert(result.begin(), std::make_move_iterator(rankIterator->begin()),
+            std::make_move_iterator(rankIterator->end()));
+
+        squadIterator->erase(rankIterator);
+
+        if (squadIterator->empty())
         {
-            army.erase(army.begin());
+            army.erase(squadIterator);
         }
-        if (j >= army[i].size() - 1)
-        {
-            j = 0;
-            i++;
-        }
-
-    }*/
+    }
+    
     return result;
 }
