@@ -5,13 +5,13 @@
 TEST(ArmyManager, CreateRank)
 {
     Rank rank =  CreateRank();
-    EXPECT_EQ(rank.size(), 20);
+    EXPECT_EQ(rank.size(), 10);
 }
 
 TEST(ArmyManager, CreateSquad)
 {
     Squad squad = CreateSquad();
-    EXPECT_EQ(squad.size(), 10);
+    EXPECT_EQ(squad.size(), 20);
 }
 
 TEST(ArmyManager, CreateArmy)
@@ -34,14 +34,14 @@ TEST(ArmyManager, CreateColumnWithCorrectArmy)
     std::vector<char> expect(expectStr.begin(), expectStr.end());
     Column result = CreateColumn(army, 1);
     EXPECT_EQ(expect, result);
-    EXPECT_EQ(9, army.begin()->size());
+    EXPECT_EQ(19, army.begin()->size());
 }
 
 TEST(ArmyManager, CreateColumnWuth10SquadsWithCorrectArmy)
 {
     Army army = CreateArmy();
-    Column result = CreateColumn(army, 11);
-    EXPECT_EQ(details::g_rankCount * 11, result.size());
+    Column result = CreateColumn(army, 21);
+    EXPECT_EQ(details::g_rankCount * 21, result.size());
     EXPECT_EQ(199, army.size());
 }
 

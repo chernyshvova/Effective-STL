@@ -14,7 +14,7 @@ Column CreateColumn(Army& army, const size_t columnVolume);
 
 namespace details
 {
-    const size_t g_rankCount = 20;
+    const size_t g_rankCount = 10;
     const size_t g_squadCount = 200;
-    const size_t g_rankCountInArmy = 2000;
+    const size_t g_rankCountInArmy = 4000;
 }
