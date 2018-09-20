@@ -74,3 +74,14 @@ Column CreateColumn(Army& army, const size_t rankCount)
     
     return result;
 }
+
+Column CreateColumnFromSquad(Army& army, const size_t columnVolume)
+{
+    if (army.empty())
+    {
+        throw std::exception();
+    }
+
+    return CreateColumn(army, details::g_rankInSquad * columnVolume);
+
+}

@@ -24,7 +24,7 @@ TEST(ArmyManager, CreateColumnWithoutArmy)
 {
     Army army;
 
-    EXPECT_THROW(CreateColumn(army, details::g_rankCount), std::exception);
+    EXPECT_THROW(CreateColumn(army, details::g_solderInRank), std::exception);
 }
 
 TEST(ArmyManager, CreateColumnWithCorrectArmy)
@@ -41,7 +41,7 @@ TEST(ArmyManager, CreateColumnWuth10SquadsWithCorrectArmy)
 {
     Army army = CreateArmy();
     Column result = CreateColumn(army, 21);
-    EXPECT_EQ(details::g_rankCount * 21, result.size());
+    EXPECT_EQ(details::g_solderInRank * 21, result.size());
     EXPECT_EQ(199, army.size());
 }
 
@@ -52,4 +52,11 @@ TEST(ArmyManager, CreateColumnManyTimes)
     CreateColumn(army, details::g_rankCountInArmy);
     
     EXPECT_EQ(0, army.size());
+}
+
+TEST(ArmyManager, CreateColumnFromSquadCount)
+{
+    Army army = CreateArmy();
+    Column result = CreateColumnFromSquad(army, 20);//20 Squads
+    EXPECT_EQ(details::g_squadCountInArmy * 20, result.size());
 }
