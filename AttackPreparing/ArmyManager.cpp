@@ -43,7 +43,7 @@ Army CreateArmy()
     return army;
 }
 
-Column CreateColumn(Army& army, const size_t rankCount)
+Column CreateColumnFromArmy(Army& army, const size_t rankCount)
 {
     if (army.empty())
     {
@@ -82,6 +82,34 @@ Column CreateColumnFromSquad(Army& army, const size_t columnVolume)
         throw std::exception();
     }
 
-    return CreateColumn(army, details::g_rankInSquad * columnVolume);
+    return CreateColumnFromArmy(army, details::g_rankInSquad * columnVolume);
+}
 
+void FillShips(Army& army, Cruiser& cruiser)
+{
+    if (!cruiser.empty())
+    {
+        throw std::exception();
+    }
+
+    Column col = CreateColumnFromArmy(army, details::g_rankInSquad);
+}
+
+Army GetArmyFromColumn(Column& column)
+{
+    Army army;
+
+    for(int i=0; i< details::g_squadCountInArmy; ++i)
+    {
+        Squad newSquad;
+        for (int n = 0; n < details::g_rankInSquad; ++n)
+        {
+            Rank newRank;
+            newRank.insert(newRank.begin(), column.begin(), column.begin() + details::g_solderInRank);
+            newSquad.push_back(newRank);
+        }
+        army.push_back(newSquad);
+
+    }
+    return army;
 }

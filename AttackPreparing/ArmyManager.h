@@ -13,8 +13,10 @@ using Cruiser = std::stack<Squad>;
 Rank CreateRank();
 Squad CreateSquad();
 Army CreateArmy();
-Column CreateColumn(Army& army, const size_t columnVolume);
+Column CreateColumnFromArmy(Army& army, const size_t columnVolume);
 Column CreateColumnFromSquad(Army& army, const size_t columnVolume);
+Army GetArmyFromColumn(Column& column);
+void FillShips(Army& army, Cruiser& cruiser);
 
 namespace details
 {
@@ -24,4 +26,5 @@ namespace details
     const size_t g_squadCountInArmy = 200;
     const size_t g_rankCountInArmy = 4000;
     const size_t g_solderInCruiser = 4000;
+    const size_t g_squadCountInCruiser = 20;
 }
