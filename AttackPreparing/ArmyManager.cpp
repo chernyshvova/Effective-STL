@@ -22,15 +22,15 @@ namespace
 
 Rank CreateRank()
 {
-    Rank initialSoldiersSquad{ 'A', 'B', 'C' };
-    initialSoldiersSquad = CreateClones(initialSoldiersSquad, g_rankSize);
-    return initialSoldiersSquad;
+Rank initialSoldiersSquad{ 'A', 'B', 'C' };
+initialSoldiersSquad = CreateClones(initialSoldiersSquad, g_rankSize);
+return initialSoldiersSquad;
 }
 
 Squad CreateSquad()
 {
     Squad squad(g_solderSize);
-    
+
     std::transform(squad.begin(), squad.end(), squad.begin(), FillCreateSquad);
     return squad;
 }
@@ -55,7 +55,7 @@ Column CreateColumnFromArmy(Army& army, const size_t rankCount)
 
     while (count)
     {
-        count --;
+        count--;
 
         auto squadIterator = army.begin();
         auto rankIterator = squadIterator->begin();
@@ -71,7 +71,7 @@ Column CreateColumnFromArmy(Army& army, const size_t rankCount)
             army.erase(squadIterator);
         }
     }
-    
+
     return result;
 }
 
@@ -105,7 +105,7 @@ Army GetArmyFromColumn(Column& column)
 {
     Army army;
 
-    for(int i=0; i< details::g_rankInSquad; ++i)
+    for (int i = 0; i < details::g_rankInSquad; ++i)
     {
         Squad newSquad;
         for (int n = 0; n < details::g_squadCountInCruiser; ++n)
@@ -119,4 +119,15 @@ Army GetArmyFromColumn(Column& column)
 
     }
     return army;
+}
+
+
+
+void EmptyShips(Army& army, Cruiser& cruiser)
+{
+    for (int i = 0; i < details::g_rankInSquad; ++i)
+    {
+        army.push_back(cruiser.top());
+        cruiser.pop();
+    }
 }

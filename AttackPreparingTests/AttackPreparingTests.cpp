@@ -79,4 +79,17 @@ TEST(ArmyManager, FillShips)
     Cruiser result; 
     FillShips(army, result);
     EXPECT_EQ(20, result.size());
+    EXPECT_EQ(0, army.size());
+}
+
+TEST(ArmyManager, EmptyShips)
+{
+    Army resultArmy;
+    Army fullArmy = CreateArmy();
+    Cruiser cruiser;
+    FillShips(fullArmy, cruiser);
+
+    EmptyShips(resultArmy, cruiser);
+    EXPECT_EQ(20, resultArmy.size());
+    EXPECT_EQ(0, cruiser.size());
 }

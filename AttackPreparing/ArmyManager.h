@@ -17,6 +17,7 @@ Column CreateColumnFromArmy(Army& army, const size_t columnVolume);
 Column CreateColumnFromSquad(Army& army, const size_t columnVolume);
 Army GetArmyFromColumn(Column& column);
 void FillShips(Army& army, Cruiser& cruiser);
+void EmptyShips(Army& column, Cruiser& cruiser);
 
 namespace details
 {
