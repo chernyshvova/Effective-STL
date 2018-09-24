@@ -12,10 +12,10 @@ using Cruiser = std::stack<Squad>;
 
 Rank CreateRank();
 Squad CreateSquad();
-Army CreateArmy();
+Army CreateArmy(const size_t size);
 Column CreateColumnFromArmy(Army& army, const size_t columnVolume);
 Column CreateColumnFromSquad(Army& army, const size_t columnVolume);
-Army GetArmyFromColumn(Column& column);
+Army GetArmyFromColumn(Column& column, const size_t rancCountInSquad);
 void FillShips(Army& army, Cruiser& cruiser);
 void EmptyShips(Army& column, Cruiser& cruiser);
 

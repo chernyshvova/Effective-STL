@@ -35,9 +35,9 @@ Squad CreateSquad()
     return squad;
 }
 
-Army CreateArmy()
+Army CreateArmy(const size_t size)
 {
-    Army army(g_squadSize);
+    Army army(size);
 
     std::transform(army.begin(), army.end(), army.begin(), FillCreateArmy);
     return army;
@@ -93,7 +93,7 @@ void FillShips(Army& army, Cruiser& cruiser)
     }
 
     Column col = CreateColumnFromArmy(army, details::g_rankCountInArmy);
-    Army armyForCruiser = GetArmyFromColumn(col);
+    Army armyForCruiser = GetArmyFromColumn(col, 2);
 
     for (int i = 0; i < details::g_squadCountInCruiser; ++i)
     {
@@ -101,11 +101,11 @@ void FillShips(Army& army, Cruiser& cruiser)
     }
 }
 
-Army GetArmyFromColumn(Column& column)
+Army GetArmyFromColumn(Column& column, const size_t rancCountInSquad)
 {
     Army army;
 
-    for (int i = 0; i < details::g_rankInSquad; ++i)
+    for (int i = 0; i < rancCountInSquad; ++i)
     {
         Squad newSquad;
         for (int n = 0; n < details::g_squadCountInCruiser; ++n)

@@ -16,8 +16,8 @@ TEST(ArmyManager, CreateSquad)
 
 TEST(ArmyManager, CreateArmy)
 {
-    Army army = CreateArmy();
-    EXPECT_EQ(army.size(), 200);
+    Army army = CreateArmy(5);
+    EXPECT_EQ(army.size(), 5);
 }
 
 TEST(ArmyManager, CreateColumnWithoutArmy)
@@ -29,25 +29,23 @@ TEST(ArmyManager, CreateColumnWithoutArmy)
 
 TEST(ArmyManager, CreateColumnWithCorrectArmy)
 {
-    Army army = CreateArmy();
+    Army army = CreateArmy(5);
     std::string expectStr = { "BABABCBCBC" };
     std::vector<char> expect(expectStr.begin(), expectStr.end());
     Column result = CreateColumnFromArmy(army, 1);
     EXPECT_EQ(expect, result);
-    EXPECT_EQ(19, army.begin()->size());
 }
 
 TEST(ArmyManager, CreateColumnWuth10SquadsWithCorrectArmy)
 {
-    Army army = CreateArmy();
+    Army army = CreateArmy(5);
     Column result = CreateColumnFromArmy(army, 21);
     EXPECT_EQ(details::g_solderInRank * 21, result.size());
-    EXPECT_EQ(199, army.size());
 }
 
 TEST(ArmyManager, CreateColumnManyTimes)
 {
-    Army army = CreateArmy();
+    Army army = CreateArmy(200);
 
     CreateColumnFromArmy(army, details::g_rankCountInArmy);
     
@@ -56,18 +54,18 @@ TEST(ArmyManager, CreateColumnManyTimes)
 
 TEST(ArmyManager, CreateColumnFromSquadCount)
 {
-    Army army = CreateArmy();
-    Column result = CreateColumnFromSquad(army, 20);//20 Squads
-    EXPECT_EQ(details::g_squadCountInArmy * 20, result.size());
+    Army army = CreateArmy(5);
+    Column result = CreateColumnFromSquad(army, 1);
+    EXPECT_EQ(details::g_squadCountInArmy * 1, result.size());
 }
 
 TEST(ArmyManager, GetArmyFromColumn)
 {
-    Army army = CreateArmy();
-    Column solders = CreateColumnFromSquad(army, details::g_squadCountInCruiser);
+    Army army = CreateArmy(20);
+    Column solders = CreateColumnFromSquad(army, 2);
 
-    Army result = GetArmyFromColumn(solders);
-    EXPECT_EQ(20, result.size());
+    Army result = GetArmyFromColumn(solders, 2);
+    EXPECT_EQ(2, result.size());
     EXPECT_EQ(20, result.begin()->size());
     EXPECT_EQ(10, result.begin()->begin()->size());
     EXPECT_EQ(0, solders.size());
@@ -75,7 +73,7 @@ TEST(ArmyManager, GetArmyFromColumn)
 
 TEST(ArmyManager, FillShips)
 {
-    Army army = CreateArmy();
+    Army army = CreateArmy(200);
     Cruiser result; 
     FillShips(army, result);
     EXPECT_EQ(20, result.size());
@@ -85,7 +83,7 @@ TEST(ArmyManager, FillShips)
 TEST(ArmyManager, EmptyShips)
 {
     Army resultArmy;
-    Army fullArmy = CreateArmy();
+    Army fullArmy = CreateArmy(200);
     Cruiser cruiser;
     FillShips(fullArmy, cruiser);
 
