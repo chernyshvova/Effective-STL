@@ -67,7 +67,16 @@ TEST(ArmyManager, GetArmyFromColumn)
     Column solders = CreateColumnFromSquad(army, details::g_squadCountInCruiser);
 
     Army result = GetArmyFromColumn(solders);
-    EXPECT_EQ(200, result.size());
+    EXPECT_EQ(20, result.size());
     EXPECT_EQ(20, result.begin()->size());
     EXPECT_EQ(10, result.begin()->begin()->size());
+    EXPECT_EQ(0, solders.size());
+}
+
+TEST(ArmyManager, FillShips)
+{
+    Army army = CreateArmy();
+    Cruiser result; 
+    FillShips(army, result);
+    EXPECT_EQ(20, result.size());
 }

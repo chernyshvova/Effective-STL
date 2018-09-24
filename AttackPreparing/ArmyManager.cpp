@@ -92,21 +92,28 @@ void FillShips(Army& army, Cruiser& cruiser)
         throw std::exception();
     }
 
-    Column col = CreateColumnFromArmy(army, details::g_rankInSquad);
+    Column col = CreateColumnFromArmy(army, details::g_rankCountInArmy);
+    Army armyForCruiser = GetArmyFromColumn(col);
+
+    for (int i = 0; i < details::g_squadCountInCruiser; ++i)
+    {
+        cruiser.push(*armyForCruiser.begin());
+    }
 }
 
 Army GetArmyFromColumn(Column& column)
 {
     Army army;
 
-    for(int i=0; i< details::g_squadCountInArmy; ++i)
+    for(int i=0; i< details::g_rankInSquad; ++i)
     {
         Squad newSquad;
-        for (int n = 0; n < details::g_rankInSquad; ++n)
+        for (int n = 0; n < details::g_squadCountInCruiser; ++n)
         {
             Rank newRank;
             newRank.insert(newRank.begin(), column.begin(), column.begin() + details::g_solderInRank);
             newSquad.push_back(newRank);
+            column.erase(column.begin(), column.begin() + details::g_solderInRank);
         }
         army.push_back(newSquad);
 
