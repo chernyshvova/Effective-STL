@@ -9,7 +9,6 @@ using Column = std::vector<char>;
 
 using Cruiser = std::stack<Squad>;
 
-
 Rank CreateRank();
 Squad CreateSquad();
 Army CreateArmy(const size_t size);

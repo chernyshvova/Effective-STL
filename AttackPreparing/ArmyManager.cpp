@@ -4,10 +4,6 @@
 
 namespace
 {
-    const size_t g_rankSize = 10;
-    const size_t g_solderSize = 20;
-    const size_t g_squadSize = 200;
-
     const Rank& FillCreateSquad(Rank& rank)
     {
         rank = CreateRank();
@@ -22,14 +18,14 @@ namespace
 
 Rank CreateRank()
 {
-Rank initialSoldiersSquad{ 'A', 'B', 'C' };
-initialSoldiersSquad = CreateClones(initialSoldiersSquad, g_rankSize);
-return initialSoldiersSquad;
+    Rank initialSoldiersSquad{ 'A', 'B', 'C' };
+    initialSoldiersSquad = CreateClones(initialSoldiersSquad, details::g_solderInRank);
+    return initialSoldiersSquad;
 }
 
 Squad CreateSquad()
 {
-    Squad squad(g_solderSize);
+    Squad squad(details::g_rankInSquad);
 
     std::transform(squad.begin(), squad.end(), squad.begin(), FillCreateSquad);
     return squad;
@@ -120,8 +116,6 @@ Army GetArmyFromColumn(Column& column, const size_t rancCountInSquad)
     }
     return army;
 }
-
-
 
 void EmptyShips(Army& army, Cruiser& cruiser)
 {
