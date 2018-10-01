@@ -87,8 +87,8 @@ void FillShips(Army& army, Cruiser& cruiser)
     {
         throw std::exception();
     }
-
-    Column col = CreateColumnFromArmy(army, details::g_rankCountInArmy);
+    
+    Column col = CreateColumnFromArmy(army, details::g_rankCountInCruiser);
     Army armyForCruiser = GetArmyFromColumn(col, 2);
 
     for (int i = 0; i < details::g_squadCountInCruiser; ++i)

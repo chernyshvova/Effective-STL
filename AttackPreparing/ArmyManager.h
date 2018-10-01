@@ -25,6 +25,7 @@ namespace details
     const size_t g_solderInSquad = 200;
     const size_t g_squadCountInArmy = 200;
     const size_t g_rankCountInArmy = 4000;
+    const size_t g_rankCountInCruiser = 400;
     const size_t g_solderInCruiser = 4000;
     const size_t g_squadCountInCruiser = 20;
 }
