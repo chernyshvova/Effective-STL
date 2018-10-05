@@ -4,28 +4,23 @@
 //containers
 //vector, list, map, stack, deque
 
-template<typename pair1, typename pair2>
-void InstertInContainer(std::map<pair1, pair2>& cont, const size_t countTimes)
+template<typename Container, typename Value>
+void Insert(Container& cont, Value value)
 {
-    static int g_guid = 0;
-    for (int i = 0; i < countTimes; ++i)
-    {
-        Securities newSecurities;
-        newSecurities.m_guid = g_guid++;
-        cont[i] = newSecurities;
-    }
+    cont.insert(cont.end(), value);
 }
 
-template<typename pair1>
-void InstertInContainer(std::stack<pair1>& cont, const size_t countTimes)
+template<typename KeyType, typename ValueType>
+void Insert(std::map<KeyType, ValueType>& cont, ValueType value)
 {
-    static int g_guid = 0;
-    for (int i = 0; i < countTimes; ++i)
-    {
-        Securities newSecurities;
-        newSecurities.m_guid = g_guid++;
-        cont.push(newSecurities);
-    }
+    static int g_key = 0;
+    cont[g_key++]= value;
+}
+
+template<typename Value, typename ValueType>
+void Insert(std::stack<ValueType>& cont, Value value)
+{
+    cont.push(value);
 }
 
 template<typename Container>
@@ -36,10 +31,9 @@ void InstertInContainer(Container& cont, const size_t countTimes)
     {
         Securities newSecurities;
         newSecurities.m_guid = g_guid++;
-        cont.insert(cont.end(), newSecurities);
+        Insert(cont, newSecurities);
     }
 }
-
 
 TEST(TrampSecurities, InsertInVectorManyTimes)
 {
