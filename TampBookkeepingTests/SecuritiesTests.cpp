@@ -63,9 +63,16 @@ TEST(TrampSecurities, InsertInMapManyTimes)
     EXPECT_EQ(1000, target.size());
 }
 
-TEST(TrampSecurities, InsertInSetManyTimes)
+TEST(TrampSecurities, InsertInStackManyTimes)
 {
     std::stack<Securities> target;
+    Securities newSecurities;
+    InstertInContainer(target, 1000);
+    EXPECT_EQ(1000, target.size());
+}
+TEST(TrampSecurities, InsertInDequeManyTimes)
+{
+    std::deque<Securities> target;
     Securities newSecurities;
     InstertInContainer(target, 1000);
     EXPECT_EQ(1000, target.size());
