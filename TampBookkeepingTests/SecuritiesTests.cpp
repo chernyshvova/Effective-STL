@@ -17,8 +17,8 @@ void Insert(std::map<KeyType, ValueType>& cont, ValueType value)
     cont[g_key++]= value;
 }
 
-template<typename Value, typename ValueType>
-void Insert(std::stack<ValueType>& cont, Value value)
+template<typename ValueType>
+void Insert(std::stack<ValueType>& cont, ValueType value)
 {
     cont.push(value);
 }
@@ -29,11 +29,19 @@ void RemoveFrom(Container& cont)
     cont.pop_back();
 }
 
+
 template<typename KeyType, typename ValueType>
 void RemoveFrom(std::map<KeyType, ValueType>& cont)
 {
     cont.erase(cont.cbegin());
 }
+
+template<typename ValueType>
+void RemoveFrom(std::stack<ValueType>& cont)
+{
+    cont.pop();
+}
+
 
 template<typename Container>
 void InstertInContainer(Container& cont, const size_t countTimes)
@@ -114,6 +122,15 @@ TEST(TrampSecurities, RemoveFromMapManyTimes)
 {
     std::map<int, Securities> target;
     InstertInContainer(target, 100);
+    RemoveFromContainer(target, 50);
+    EXPECT_EQ(50, target.size());
+}
+
+TEST(TrampSecurities, RemoveFromStackManyTimes)
+{
+    std::stack<Securities> target;
+    InstertInContainer(target, 100);
+    
     RemoveFromContainer(target, 50);
     EXPECT_EQ(50, target.size());
 }
