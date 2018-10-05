@@ -24,6 +24,18 @@ void Insert(std::stack<ValueType>& cont, Value value)
 }
 
 template<typename Container>
+void RemoveFrom(Container& cont)
+{
+    cont.pop_back();
+}
+
+template<typename KeyType, typename ValueType>
+void RemoveFrom(std::map<KeyType, ValueType>& cont)
+{
+    cont.erase(cont.cbegin());
+}
+
+template<typename Container>
 void InstertInContainer(Container& cont, const size_t countTimes)
 {
     static int g_guid = 0;
@@ -35,39 +47,73 @@ void InstertInContainer(Container& cont, const size_t countTimes)
     }
 }
 
+template<typename Container>
+void RemoveFromContainer(Container& cont, const size_t countTimes)
+{
+    for (int i = 0; i < countTimes; ++i)
+    {
+        RemoveFrom(cont);
+    }
+}
+
+
 TEST(TrampSecurities, InsertInVectorManyTimes)
 {
     std::vector<Securities> target;
-    InstertInContainer(target, 1000);
-    EXPECT_EQ(1000, target.size());
+    InstertInContainer(target, 100);
+    EXPECT_EQ(100, target.size());
 }
 
 TEST(TrampSecurities, InsertInListManyTimes)
 {
     std::list<Securities> target;
-    InstertInContainer(target, 1000);
-    EXPECT_EQ(1000, target.size());
+    InstertInContainer(target, 100);
+    EXPECT_EQ(100, target.size());
 }
 
 TEST(TrampSecurities, InsertInMapManyTimes)
 {
     std::map<int, Securities> target;
     Securities newSecurities;
-    InstertInContainer(target, 1000);
-    EXPECT_EQ(1000, target.size());
+    InstertInContainer(target, 100);
+    EXPECT_EQ(100, target.size());
 }
 
 TEST(TrampSecurities, InsertInStackManyTimes)
 {
     std::stack<Securities> target;
     Securities newSecurities;
-    InstertInContainer(target, 1000);
-    EXPECT_EQ(1000, target.size());
+    InstertInContainer(target, 100);
+    EXPECT_EQ(100, target.size());
 }
 TEST(TrampSecurities, InsertInDequeManyTimes)
 {
     std::deque<Securities> target;
     Securities newSecurities;
-    InstertInContainer(target, 1000);
-    EXPECT_EQ(1000, target.size());
+    InstertInContainer(target, 100);
+    EXPECT_EQ(100, target.size());
+}
+
+TEST(TrampSecurities, RemoveFromVectorManyTimes)
+{
+    std::vector<Securities> target;
+    InstertInContainer(target, 100);
+    RemoveFromContainer(target, 50);
+    EXPECT_EQ(50, target.size());
+}
+
+TEST(TrampSecurities, RemoveFromListManyTimes)
+{
+    std::list<Securities> target;
+    InstertInContainer(target, 100);
+    RemoveFromContainer(target, 50);
+    EXPECT_EQ(50, target.size());
+}
+
+TEST(TrampSecurities, RemoveFromMapManyTimes)
+{
+    std::map<int, Securities> target;
+    InstertInContainer(target, 100);
+    RemoveFromContainer(target, 50);
+    EXPECT_EQ(50, target.size());
 }
