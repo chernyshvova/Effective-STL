@@ -4,6 +4,6 @@
 struct Securities
 {
     int m_guid;
-    std::vector<char> m_data = std::vector<char>(1000);
+    std::vector<char> m_data = std::vector<char>(10000);
 };
 

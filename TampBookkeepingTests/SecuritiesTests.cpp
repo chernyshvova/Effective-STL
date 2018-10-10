@@ -46,7 +46,7 @@ void RemoveFrom(std::stack<ValueType>& cont)
 template<typename Container>
 void InstertInContainer(Container& cont, const size_t countTimes)
 {
-    static int g_guid = 0;
+    int g_guid = 0;
     for (int i = 0; i < countTimes; ++i)
     {
         Securities newSecurities;
@@ -61,6 +61,18 @@ void RemoveFromContainer(Container& cont, const size_t countTimes)
     for (int i = 0; i < countTimes; ++i)
     {
         RemoveFrom(cont);
+    }
+}
+
+template<typename Container>
+Securities FindInConteiner(Container& cont, const size_t securitiesGui)
+{
+    for (auto it: cont)
+    {
+        if (it.m_guid == securitiesGui)
+        {
+            return it;
+        }
     }
 }
 
@@ -94,6 +106,7 @@ TEST(TrampSecurities, InsertInStackManyTimes)
     InstertInContainer(target, 100);
     EXPECT_EQ(100, target.size());
 }
+
 TEST(TrampSecurities, InsertInDequeManyTimes)
 {
     std::deque<Securities> target;
@@ -133,4 +146,30 @@ TEST(TrampSecurities, RemoveFromStackManyTimes)
     
     RemoveFromContainer(target, 50);
     EXPECT_EQ(50, target.size());
+}
+
+TEST(TrampSecurities, RemoveFromDequeManyTimes)
+{
+    std::deque<Securities> target;
+    InstertInContainer(target, 100);
+
+    RemoveFromContainer(target, 50);
+    EXPECT_EQ(50, target.size());
+}
+
+TEST(TrampSecurities, FindInVector)
+{
+    std::vector<Securities> target;
+    InstertInContainer(target, 100);
+    InstertInContainer(target, 100);
+    Securities result = FindInConteiner(target, 10);
+    EXPECT_EQ(result.m_guid, 10);
+}
+
+TEST(TrampSecurities, FindInList)
+{
+    std::list<Securities> target;
+    InstertInContainer(target, 100);
+    Securities result = FindInConteiner(target, 10);
+    EXPECT_EQ(result.m_guid, 10);
 }
