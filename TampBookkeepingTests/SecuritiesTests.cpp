@@ -65,39 +65,44 @@ void RemoveFromContainer(Container& cont, const size_t countTimes)
 }
 
 template<typename Container>
-Securities FindInConteiner(Container& cont, const size_t securitiesGui)
+bool FindInConteiner(Container& cont, const size_t securitiesGui, Securities& findResult)
 {
     for (auto it: cont)
     {
         if (it.m_guid == securitiesGui)
         {
-            return it;
+            findResult = it;
+            return true;
         }
     }
+    return false;
 }
 
 template<typename KeyType, typename ValueType>
-Securities FindInConteiner(std::map<KeyType, ValueType>& cont, const size_t securitiesGui)
+bool FindInConteiner(std::map<KeyType, ValueType>& cont, const size_t securitiesGui, Securities& findResult)
 {
     for (auto it : cont)
     {
         if (it.second.m_guid == securitiesGui)
         {
-            return it.second;
+            findResult = it.second;
+            return true;
         }
     }
+    return false;
 }
 
 template<typename KeyType, typename ValueType>
-Securities FindInConteiner(std::stack<KeyType, ValueType>& cont, const size_t securitiesGui)
+bool FindInConteiner(std::stack<KeyType, ValueType>& cont, const size_t securitiesGui, Securities& findResult)
 {
     std::stack<KeyType> tmp;
-    Securities result;
+    bool result = false;
     while (!cont.empty())
     {
         if (cont.top().m_guid == securitiesGui)
         {
-            result = cont.top();
+            findResult = cont.top();
+            result = true;
         }
         tmp.push(cont.top());
         cont.pop();
@@ -112,23 +117,23 @@ Securities FindInConteiner(std::stack<KeyType, ValueType>& cont, const size_t se
     return result;
 }
 
-template<typename ValueType>
-void RemoveFrom(std::stack<ValueType>& cont, const size_t securitiesGui)
-{
-    auto top = cont.top();
-    while (top)
-    {
-        if(cont.pop())
-    }
-
-    for (auto it : cont)
-    {
-        if (it.second.m_guid == securitiesGui)
-        {
-            return it.second;
-        }
-    }
-}
+//template<typename ValueType>
+//void RemoveFrom(std::stack<ValueType>& cont, const size_t securitiesGui)
+//{
+//    auto top = cont.top();
+//    while (top)
+//    {
+//        if(cont.pop())
+//    }
+//
+//    for (auto it : cont)
+//    {
+//        if (it.second.m_guid == securitiesGui)
+//        {
+//            return it.second;
+//        }
+//    }
+//}
 
 
 TEST(TrampSecurities, InsertInVectorManyTimes)
@@ -214,41 +219,84 @@ TEST(TrampSecurities, RemoveFromDequeManyTimes)
 TEST(TrampSecurities, FindInVector)
 {
     std::vector<Securities> target;
+    Securities searchResult;
     InstertInContainer(target, 100);
+    EXPECT_TRUE(FindInConteiner(target, 10, searchResult));
+    EXPECT_EQ(searchResult.m_guid, 10);
+}
+
+TEST(TrampSecurities, FindInVectorAndNotFoundReturnFalse)
+{
+    std::vector<Securities> target;
+    Securities searchResult;
     InstertInContainer(target, 100);
-    Securities result = FindInConteiner(target, 10);
-    EXPECT_EQ(result.m_guid, 10);
+    EXPECT_FALSE(FindInConteiner(target, 10000, searchResult));
 }
 
 TEST(TrampSecurities, FindInList)
 {
     std::list<Securities> target;
+    Securities searchResult;
     InstertInContainer(target, 100);
-    Securities result = FindInConteiner(target, 10);
-    EXPECT_EQ(result.m_guid, 10);
+    EXPECT_TRUE(FindInConteiner(target, 10, searchResult));
+    EXPECT_EQ(searchResult.m_guid, 10);
+}
+
+TEST(TrampSecurities, FindInListAndNotFoundReturnFalse)
+{
+    std::list<Securities> target;
+    Securities searchResult;
+    InstertInContainer(target, 100);
+    EXPECT_FALSE(FindInConteiner(target, 1000, searchResult));
 }
 
 TEST(TrampSecurities, FindInMap)
 {
     std::map<int, Securities> target;
     InstertInContainer(target, 100);
-    Securities result = FindInConteiner(target, 10);
-    EXPECT_EQ(result.m_guid, 10);
+    Securities searchResult;
+    EXPECT_TRUE(FindInConteiner(target, 10, searchResult));
+    EXPECT_EQ(searchResult.m_guid, 10);
+}
+
+TEST(TrampSecurities, FindInMapAndNotFound)
+{
+    std::map<int, Securities> target;
+    InstertInContainer(target, 100);
+    Securities searchResult;
+    EXPECT_FALSE(FindInConteiner(target, 1000, searchResult));
 }
 
 TEST(TrampSecurities, FindInStack)
 {
     std::stack<Securities> target;
-   
+    Securities searchResult;
     InstertInContainer(target, 100);
-    Securities result = FindInConteiner(target, 10);
-    EXPECT_EQ(result.m_guid, 10);
+    EXPECT_TRUE(FindInConteiner(target, 10, searchResult));
+    EXPECT_EQ(searchResult.m_guid, 10);
 }
 
-//TEST(TrampSecurities, FindInDeque)
-//{
-//    std::deque<Securities> target;
-//    InstertInContainer(target, 100);
-//    Securities result = FindInConteiner(target, 10);
-//    EXPECT_EQ(result.m_guid, 10);
-//}
+TEST(TrampSecurities, FindInStackAnNotFoundREturnFalse)
+{
+    std::stack<Securities> target;
+    Securities searchResult;
+    InstertInContainer(target, 100);
+    EXPECT_FALSE(FindInConteiner(target, 1000, searchResult));
+}
+
+TEST(TrampSecurities, FindInDeque)
+{
+    std::deque<Securities> target;
+    Securities searchResult;
+    InstertInContainer(target, 100);
+    EXPECT_TRUE(FindInConteiner(target, 10, searchResult));
+    EXPECT_EQ(searchResult.m_guid, 10);
+}
+
+TEST(TrampSecurities, FindInDequeAndNotFoundReturnFalse)
+{
+    std::deque<Securities> target;
+    Securities searchResult;
+    InstertInContainer(target, 100);
+    EXPECT_FALSE(FindInConteiner(target, 1000, searchResult));
+}
