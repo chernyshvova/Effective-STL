@@ -152,6 +152,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Operation.h" />
     <ClInclude Include="Securities.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

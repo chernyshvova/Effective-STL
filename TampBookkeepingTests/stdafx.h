@@ -10,9 +10,5 @@
 #include <stdio.h>
 #include <tchar.h>
 #include "gtest\gtest.h"
-#include <vector>
-#include <list>
-#include <map>
-#include <stack>
-#include <deque>
+
 // TODO: reference additional headers your program requires here
