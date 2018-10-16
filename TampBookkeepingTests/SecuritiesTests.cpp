@@ -76,6 +76,60 @@ Securities FindInConteiner(Container& cont, const size_t securitiesGui)
     }
 }
 
+template<typename KeyType, typename ValueType>
+Securities FindInConteiner(std::map<KeyType, ValueType>& cont, const size_t securitiesGui)
+{
+    for (auto it : cont)
+    {
+        if (it.second.m_guid == securitiesGui)
+        {
+            return it.second;
+        }
+    }
+}
+
+template<typename KeyType, typename ValueType>
+Securities FindInConteiner(std::stack<KeyType, ValueType>& cont, const size_t securitiesGui)
+{
+    std::stack<KeyType> tmp;
+    Securities result;
+    while (!cont.empty())
+    {
+        if (cont.top().m_guid == securitiesGui)
+        {
+            result = cont.top();
+        }
+        tmp.push(cont.top());
+        cont.pop();
+    }
+    
+    while (!tmp.empty())
+    {
+        cont.push(tmp.top());
+        tmp.pop();
+    }
+
+    return result;
+}
+
+template<typename ValueType>
+void RemoveFrom(std::stack<ValueType>& cont, const size_t securitiesGui)
+{
+    auto top = cont.top();
+    while (top)
+    {
+        if(cont.pop())
+    }
+
+    for (auto it : cont)
+    {
+        if (it.second.m_guid == securitiesGui)
+        {
+            return it.second;
+        }
+    }
+}
+
 
 TEST(TrampSecurities, InsertInVectorManyTimes)
 {
@@ -173,3 +227,28 @@ TEST(TrampSecurities, FindInList)
     Securities result = FindInConteiner(target, 10);
     EXPECT_EQ(result.m_guid, 10);
 }
+
+TEST(TrampSecurities, FindInMap)
+{
+    std::map<int, Securities> target;
+    InstertInContainer(target, 100);
+    Securities result = FindInConteiner(target, 10);
+    EXPECT_EQ(result.m_guid, 10);
+}
+
+TEST(TrampSecurities, FindInStack)
+{
+    std::stack<Securities> target;
+   
+    InstertInContainer(target, 100);
+    Securities result = FindInConteiner(target, 10);
+    EXPECT_EQ(result.m_guid, 10);
+}
+
+//TEST(TrampSecurities, FindInDeque)
+//{
+//    std::deque<Securities> target;
+//    InstertInContainer(target, 100);
+//    Securities result = FindInConteiner(target, 10);
+//    EXPECT_EQ(result.m_guid, 10);
+//}
