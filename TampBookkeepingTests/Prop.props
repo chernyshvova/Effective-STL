@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <lib_dir>$(SolutionDir)$(Platform)\$(Configuration)\</lib_dir>
+    <AttackPreparing>$(SolutionDir)AttackPreparing</AttackPreparing>
+    <Clones>$(SolutionDir)Clones</Clones>
+    <TrampBookkeeping>$(SolutionDir)Bookkeeping</TrampBookkeeping>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="lib_dir">
+      <Value>$(lib_dir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="AttackPreparing">
+      <Value>$(AttackPreparing)</Value>
+    </BuildMacro>
+    <BuildMacro Include="Clones">
+      <Value>$(Clones)</Value>
+    </BuildMacro>
+    <BuildMacro Include="TrampBookkeeping">
+      <Value>$(TrampBookkeeping)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
