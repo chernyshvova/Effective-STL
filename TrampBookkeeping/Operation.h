@@ -45,7 +45,7 @@ namespace trampOperation
     template<typename Container>
     void InstertInContainer(Container& cont, const size_t countTimes)
     {
-        int g_guid = 0;
+        int g_guid = cont.size() -1;
         for (int i = 0; i < countTimes; ++i)
         {
             Securities newSecurities;
@@ -114,5 +114,36 @@ namespace trampOperation
         }
 
         return result;
+    }
+}
+
+template<typename Container>
+void InsertManyTimes(Container& container, const size_t count, const size_t times)
+{
+    for (int i = 0; i < count; ++i)
+    {
+        InstertInContainer(container, times);
+    }
+}
+
+template<typename Container>
+void RemoveManyTimes(Container& container, const size_t count, const size_t times)
+{
+    for (int i = 0; i < count; ++i)
+    {
+        RemoveFromContainer(container, times);
+    }
+}
+
+template<typename Container>
+void FindManyTimes(Container& container, const size_t count, const size_t times)
+{
+    Securities result;
+    for (int i = 0; i < 100; ++i)
+    {
+        if (!FindInConteiner(container, i, result))
+        {
+            throw std::exception("searching was fail");
+        }
     }
 }

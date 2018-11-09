@@ -7,168 +7,182 @@ using namespace trampOperation;
 //containers
 //vector, list, map, stack, deque
 
-
-TEST(TrampSecurities, InsertInVectorManyTimes)
+class VectoreTest : public testing::Test
 {
-    std::vector<Securities> target;
-    InstertInContainer(target, 100);
-    EXPECT_EQ(100, target.size());
+public:
+    virtual void SetUp()
+    {
+        InsertManyTimes(m_vector, 1000, 100);
+    }
+
+    virtual void TearDown()
+    {
+        m_vector.clear();
+    }
+
+public:
+    std::vector<Securities> m_vector;
+};
+
+class ListTest : public testing::Test
+{
+public:
+    virtual void SetUp()
+    {
+        InsertManyTimes(m_list, 1000, 100);
+    }
+
+    virtual void TearDown()
+    {
+        m_list.clear();
+    }
+
+public:
+    std::list<Securities> m_list;
+};
+
+class MapTest : public testing::Test
+{
+public:
+    virtual void SetUp()
+    {
+        InsertManyTimes(m_map, 1000, 100);
+    }
+
+    virtual void TearDown()
+    {
+        m_map.clear();
+    }
+
+public:
+    std::map<int,Securities> m_map;
+};
+
+class StackTest : public testing::Test
+{
+public:
+    virtual void SetUp()
+    {
+        InsertManyTimes(m_stack, 1000, 100);
+    }
+
+    virtual void TearDown()
+    {
+        RemoveFromContainer(m_stack, m_stack.size());
+    }
+
+public:
+    std::stack<Securities> m_stack;
+};
+
+class DequeTest : public testing::Test
+{
+public:
+    virtual void SetUp()
+    {
+        InsertManyTimes(m_deque, 1000, 100);
+    }
+
+    virtual void TearDown()
+    {
+        m_deque.clear();
+    }
+
+public:
+    std::deque<Securities> m_deque;
+};
+
+TEST(InsertInVectoreTest, InsertInVectorManyTimes)
+{
+    std::vector<Securities> vector;
+    InsertManyTimes(vector, 1000, 100);
+    EXPECT_EQ(100000, vector.size());
 }
 
-TEST(TrampSecurities, InsertInListManyTimes)
+TEST_F(VectoreTest, RemoveFromVectorManyTimes)
 {
-    std::list<Securities> target;
-    InstertInContainer(target, 100);
-    EXPECT_EQ(100, target.size());
+    RemoveManyTimes(m_vector, 1000, 50);
+    EXPECT_EQ(50000, m_vector.size());
 }
 
-TEST(TrampSecurities, InsertInMapManyTimes)
+TEST_F(VectoreTest, FindInVector)
 {
-    std::map<int, Securities> target;
-    Securities newSecurities;
-    InstertInContainer(target, 100);
-    EXPECT_EQ(100, target.size());
+    EXPECT_NO_THROW(FindManyTimes(m_vector, 1000, 100));
 }
 
-TEST(TrampSecurities, InsertInStackManyTimes)
+TEST(InsertInListTest, InsertInListManyTimes)
 {
-    std::stack<Securities> target;
-    Securities newSecurities;
-    InstertInContainer(target, 100);
-    EXPECT_EQ(100, target.size());
+    std::list<Securities> list;
+    InsertManyTimes(list, 1000, 100);
+    EXPECT_EQ(100000, list.size());
 }
 
-TEST(TrampSecurities, InsertInDequeManyTimes)
+TEST_F(ListTest, RemoveFromListManyTimes)
 {
-    std::deque<Securities> target;
-    Securities newSecurities;
-    InstertInContainer(target, 100);
-    EXPECT_EQ(100, target.size());
+    RemoveManyTimes(m_list, 1000, 50);
+    EXPECT_EQ(50000, m_list.size());
 }
 
-TEST(TrampSecurities, RemoveFromVectorManyTimes)
+TEST_F(ListTest, FindInList)
 {
-    std::vector<Securities> target;
-    InstertInContainer(target, 100);
-    RemoveFromContainer(target, 50);
-    EXPECT_EQ(50, target.size());
+    EXPECT_NO_THROW(FindManyTimes(m_list, 1000, 100));
 }
 
-TEST(TrampSecurities, RemoveFromListManyTimes)
+
+TEST(InsertInMapTest, InsertInMapManyTimes)
 {
-    std::list<Securities> target;
-    InstertInContainer(target, 100);
-    RemoveFromContainer(target, 50);
-    EXPECT_EQ(50, target.size());
+    std::map<int, Securities> map;
+    InsertManyTimes(map, 1000, 100);
+    EXPECT_EQ(100000, map.size());
 }
 
-TEST(TrampSecurities, RemoveFromMapManyTimes)
+TEST_F(MapTest, RemoveFromMapManyTimes)
 {
-    std::map<int, Securities> target;
-    InstertInContainer(target, 100);
-    RemoveFromContainer(target, 50);
-    EXPECT_EQ(50, target.size());
+    RemoveManyTimes(m_map, 1000, 50);
+    EXPECT_EQ(50000, m_map.size());
 }
 
-TEST(TrampSecurities, RemoveFromStackManyTimes)
+TEST_F(MapTest, FindInMap)
 {
-    std::stack<Securities> target;
-    InstertInContainer(target, 100);
-    
-    RemoveFromContainer(target, 50);
-    EXPECT_EQ(50, target.size());
+    EXPECT_NO_THROW(FindManyTimes(m_map, 1000, 100));
 }
 
-TEST(TrampSecurities, RemoveFromDequeManyTimes)
+TEST(InsertInStackTest, InsertInStackManyTimes)
 {
-    std::deque<Securities> target;
-    InstertInContainer(target, 100);
-
-    RemoveFromContainer(target, 50);
-    EXPECT_EQ(50, target.size());
+    std::stack<Securities> stack;
+    InsertManyTimes(stack, 1000, 100);
+    EXPECT_EQ(100000, stack.size());
 }
 
-TEST(TrampSecurities, FindInVector)
+TEST_F(StackTest, RemoveFromStackManyTimes)
 {
-    std::vector<Securities> target;
-    Securities searchResult;
-    InstertInContainer(target, 100);
-    EXPECT_TRUE(FindInConteiner(target, 10, searchResult));
-    EXPECT_EQ(searchResult.m_guid, 10);
+    RemoveManyTimes(m_stack, 1000, 50);
+    EXPECT_EQ(50000, m_stack.size());
 }
 
-TEST(TrampSecurities, FindInVectorAndNotFoundReturnFalse)
+//TEST_F(StackTest, FindInStack)
+//{
+//    EXPECT_NO_THROW(FindManyTimes(m_stack, 1000, 100));
+//}
+
+TEST(InsertInDequeTest, InsertInDequeManyTimes)
 {
-    std::vector<Securities> target;
-    Securities searchResult;
-    InstertInContainer(target, 100);
-    EXPECT_FALSE(FindInConteiner(target, 10000, searchResult));
+    std::deque<Securities> deque;
+    InsertManyTimes(deque, 1000, 100);
+    EXPECT_EQ(100000, deque.size());
 }
 
-TEST(TrampSecurities, FindInList)
+TEST_F(DequeTest, RemoveFromDequeManyTimes)
 {
-    std::list<Securities> target;
-    Securities searchResult;
-    InstertInContainer(target, 100);
-    EXPECT_TRUE(FindInConteiner(target, 10, searchResult));
-    EXPECT_EQ(searchResult.m_guid, 10);
+    RemoveManyTimes(m_deque, 1000, 50);
+    EXPECT_EQ(50000, m_deque.size());
 }
 
-TEST(TrampSecurities, FindInListAndNotFoundReturnFalse)
+TEST_F(DequeTest, FindInDeque)
 {
-    std::list<Securities> target;
-    Securities searchResult;
-    InstertInContainer(target, 100);
-    EXPECT_FALSE(FindInConteiner(target, 1000, searchResult));
+    EXPECT_NO_THROW(FindManyTimes(m_deque, 1000, 100));
 }
 
-TEST(TrampSecurities, FindInMap)
-{
-    std::map<int, Securities> target;
-    InstertInContainer(target, 100);
-    Securities searchResult;
-    EXPECT_TRUE(FindInConteiner(target, 10, searchResult));
-    EXPECT_EQ(searchResult.m_guid, 10);
-}
 
-TEST(TrampSecurities, FindInMapAndNotFound)
-{
-    std::map<int, Securities> target;
-    InstertInContainer(target, 100);
-    Securities searchResult;
-    EXPECT_FALSE(FindInConteiner(target, 1000, searchResult));
-}
 
-TEST(TrampSecurities, FindInStack)
-{
-    std::stack<Securities> target;
-    Securities searchResult;
-    InstertInContainer(target, 100);
-    EXPECT_TRUE(FindInConteiner(target, 10, searchResult));
-    EXPECT_EQ(searchResult.m_guid, 10);
-}
 
-TEST(TrampSecurities, FindInStackAnNotFoundREturnFalse)
-{
-    std::stack<Securities> target;
-    Securities searchResult;
-    InstertInContainer(target, 100);
-    EXPECT_FALSE(FindInConteiner(target, 1000, searchResult));
-}
-
-TEST(TrampSecurities, FindInDeque)
-{
-    std::deque<Securities> target;
-    Securities searchResult;
-    InstertInContainer(target, 100);
-    EXPECT_TRUE(FindInConteiner(target, 10, searchResult));
-    EXPECT_EQ(searchResult.m_guid, 10);
-}
-
-TEST(TrampSecurities, FindInDequeAndNotFoundReturnFalse)
-{
-    std::deque<Securities> target;
-    Securities searchResult;
-    InstertInContainer(target, 100);
-    EXPECT_FALSE(FindInConteiner(target, 1000, searchResult));
-}
