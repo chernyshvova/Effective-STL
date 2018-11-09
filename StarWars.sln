@@ -21,7 +21,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AttackPreparingDemo", "Atta
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TrampBookkeeping", "TrampBookkeeping\TrampBookkeeping.vcxproj", "{13D96365-7968-4ED5-AF6F-19FECEA1FBCC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TampBookkeepingTests", "TampBookkeepingTests\TampBookkeepingTests.vcxproj", "{F4551228-DB70-4468-8BE1-CFA6969A9F0C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TrampBookkeepingTests", "TampBookkeepingTests\TampBookkeepingTests.vcxproj", "{F4551228-DB70-4468-8BE1-CFA6969A9F0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
