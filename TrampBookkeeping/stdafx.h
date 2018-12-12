@@ -9,10 +9,9 @@
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 
-
-
-// TODO: reference additional headers your program requires here
 #include <vector>
 #include <list>
-#include <algorithm>
+#include <map>
 #include <stack>
+#include <deque>
+// TODO: reference additional headers your program requires here
