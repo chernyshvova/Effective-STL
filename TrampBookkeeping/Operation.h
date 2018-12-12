@@ -80,15 +80,12 @@ namespace trampOperation
     template<typename KeyType, typename ValueType>
     bool FindInConteiner(std::map<KeyType, ValueType>& cont, const size_t securitiesGui, Securities& findResult)
     {
-        for (auto it : cont)
+        if (cont.find(securitiesGui) != cont.end())
         {
-            if (it.second.m_guid == securitiesGui)
-            {
-                findResult = it.second;
-                return true;
-            }
+            return false;
         }
-        return false;
+
+        return true;
     }
 
     template<typename KeyType, typename ValueType>
@@ -139,11 +136,13 @@ template<typename Container>
 void FindManyTimes(Container& container, const size_t count, const size_t times)
 {
     Securities result;
-    for (int i = 0; i < 100; ++i)
+    for (int i = 0; i < count; ++i)
     {
-        if (!FindInConteiner(container, i, result))
-        {
-            throw std::exception("searching was fail");
+        for (int j = 0; j < times; ++j) {
+            if (!FindInConteiner(container, j, result))
+            {
+                throw std::exception("searching was fail");
+            }
         }
     }
 }

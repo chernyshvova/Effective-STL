@@ -7,12 +7,21 @@ using namespace trampOperation;
 //containers
 //vector, list, map, stack, deque
 
+namespace{
+    
+    const size_t s_iteration_count = 1000;
+    const size_t s_itemCount = 100;
+    const size_t s_removeCount = 50;
+    const size_t s_findCount = 100;
+}
+
+
 class VectoreTest : public testing::Test
 {
 public:
     virtual void SetUp()
     {
-        InsertManyTimes(m_vector, 1000, 100);
+        InsertManyTimes(m_vector, s_iteration_count, s_itemCount);
     }
 
     virtual void TearDown()
@@ -29,7 +38,7 @@ class ListTest : public testing::Test
 public:
     virtual void SetUp()
     {
-        InsertManyTimes(m_list, 1000, 100);
+        InsertManyTimes(m_list, s_iteration_count, s_itemCount);
     }
 
     virtual void TearDown()
@@ -46,7 +55,7 @@ class MapTest : public testing::Test
 public:
     virtual void SetUp()
     {
-        InsertManyTimes(m_map, 1000, 100);
+        InsertManyTimes(m_map, s_iteration_count, s_itemCount);
     }
 
     virtual void TearDown()
@@ -63,7 +72,7 @@ class StackTest : public testing::Test
 public:
     virtual void SetUp()
     {
-        InsertManyTimes(m_stack, 1000, 100);
+        InsertManyTimes(m_stack, s_iteration_count, s_itemCount);
     }
 
     virtual void TearDown()
@@ -80,7 +89,7 @@ class DequeTest : public testing::Test
 public:
     virtual void SetUp()
     {
-        InsertManyTimes(m_deque, 1000, 100);
+        InsertManyTimes(m_deque, s_iteration_count, s_itemCount);
     }
 
     virtual void TearDown()
@@ -92,97 +101,96 @@ public:
     std::deque<Securities> m_deque;
 };
 
-TEST(InsertInVectoreTest, InsertInVectorManyTimes)
+TEST(InsertInVectorTest, InsertInVectorManyTimes)
 {
     std::vector<Securities> vector;
-    InsertManyTimes(vector, 1000, 100);
+    InsertManyTimes(vector, s_iteration_count, s_itemCount);
     EXPECT_EQ(100000, vector.size());
 }
 
 TEST_F(VectoreTest, RemoveFromVectorManyTimes)
 {
-    RemoveManyTimes(m_vector, 1000, 50);
-    EXPECT_EQ(50000, m_vector.size());
+    RemoveManyTimes(m_vector, s_itemCount, s_removeCount);
+    EXPECT_EQ(95000, m_vector.size());
 }
 
 TEST_F(VectoreTest, FindInVector)
 {
-    EXPECT_NO_THROW(FindManyTimes(m_vector, 1000, 100));
+    EXPECT_NO_THROW(FindManyTimes(m_vector, s_itemCount, s_findCount));
 }
 
 TEST(InsertInListTest, InsertInListManyTimes)
 {
     std::list<Securities> list;
-    InsertManyTimes(list, 1000, 100);
+    InsertManyTimes(list, s_iteration_count, s_itemCount);
     EXPECT_EQ(100000, list.size());
 }
 
 TEST_F(ListTest, RemoveFromListManyTimes)
 {
-    RemoveManyTimes(m_list, 1000, 50);
-    EXPECT_EQ(50000, m_list.size());
+    RemoveManyTimes(m_list, s_itemCount, s_removeCount);
+    EXPECT_EQ(95000, m_list.size());
 }
 
 TEST_F(ListTest, FindInList)
 {
-    EXPECT_NO_THROW(FindManyTimes(m_list, 1000, 100));
+    EXPECT_NO_THROW(FindManyTimes(m_list, s_itemCount, s_findCount));
 }
 
 
 TEST(InsertInMapTest, InsertInMapManyTimes)
 {
     std::map<int, Securities> map;
-    InsertManyTimes(map, 1000, 100);
+    InsertManyTimes(map, s_iteration_count, s_itemCount);
     EXPECT_EQ(100000, map.size());
 }
 
 TEST_F(MapTest, RemoveFromMapManyTimes)
 {
-    RemoveManyTimes(m_map, 1000, 50);
-    EXPECT_EQ(50000, m_map.size());
+    RemoveManyTimes(m_map, s_itemCount, s_removeCount);
+    EXPECT_EQ(95000, m_map.size());
 }
 
 TEST_F(MapTest, FindInMap)
 {
-    EXPECT_NO_THROW(FindManyTimes(m_map, 1000, 100));
+    EXPECT_NO_THROW(FindManyTimes(m_map, s_itemCount, s_findCount));
 }
 
 TEST(InsertInStackTest, InsertInStackManyTimes)
 {
     std::stack<Securities> stack;
-    InsertManyTimes(stack, 1000, 100);
+    InsertManyTimes(stack, s_iteration_count, s_itemCount);
     EXPECT_EQ(100000, stack.size());
 }
 
 TEST_F(StackTest, RemoveFromStackManyTimes)
 {
-    RemoveManyTimes(m_stack, 1000, 50);
-    EXPECT_EQ(50000, m_stack.size());
+    RemoveManyTimes(m_stack, s_itemCount, s_removeCount);
+    EXPECT_EQ(95000, m_stack.size());
 }
 
 //TEST_F(StackTest, FindInStack)
 //{
-//    EXPECT_NO_THROW(FindManyTimes(m_stack, 1000, 100));
+//    EXPECT_NO_THROW(FindManyTimes(m_stack, s_itemCount, s_findCount));
 //}
 
 TEST(InsertInDequeTest, InsertInDequeManyTimes)
 {
     std::deque<Securities> deque;
-    InsertManyTimes(deque, 1000, 100);
+    InsertManyTimes(deque, s_iteration_count, s_itemCount);
     EXPECT_EQ(100000, deque.size());
 }
 
 TEST_F(DequeTest, RemoveFromDequeManyTimes)
 {
-    RemoveManyTimes(m_deque, 1000, 50);
-    EXPECT_EQ(50000, m_deque.size());
+    RemoveManyTimes(m_deque, s_itemCount, s_removeCount);
+    EXPECT_EQ(95000, m_deque.size());
 }
 
 TEST_F(DequeTest, FindInDeque)
 {
-    EXPECT_NO_THROW(FindManyTimes(m_deque, 1000, 100));
+    EXPECT_NO_THROW(FindManyTimes(m_deque, s_itemCount, s_findCount));
 }
-
 
 
 
