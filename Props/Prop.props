@@ -6,6 +6,7 @@
     <AttackPreparing>$(SolutionDir)AttackPreparing</AttackPreparing>
     <Clones>$(SolutionDir)Clones</Clones>
     <TrampBookkeeping>$(SolutionDir)TrampBookkeeping</TrampBookkeeping>
+    <NewOrder>$(SolutionDir)NewOrderLib</NewOrder>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />
@@ -21,6 +22,9 @@
     </BuildMacro>
     <BuildMacro Include="TrampBookkeeping">
       <Value>$(TrampBookkeeping)</Value>
+    </BuildMacro>
+    <BuildMacro Include="NewOrder">
+      <Value>$(NewOrder)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>
