@@ -13,9 +13,6 @@ namespace force
         ForceRemover& operator++();
         ForceRemover& operator++(int);
         ForceRemover& operator+=(int);
-        //ForceRemover& operator--();
-        //ForceRemover operator--(int);
-
 
     private:
         std::string::iterator m_cursor;

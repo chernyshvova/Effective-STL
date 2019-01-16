@@ -50,18 +50,3 @@ force::ForceRemover & force::ForceRemover::operator+=(int count)
     m_cursor += count;
     return *this;
 }
-
-//force::ForceRemover& force::ForceRemover::operator--()
-//{
-//    --m_cursor;
-//    return *this;
-//}
-
-//wrong ?
-//force::ForceRemover force::ForceRemover::operator--(int)
-//{
-//    ForceRemover it = *this;
-//    --(*this);
-//    return it;
-//}
-
