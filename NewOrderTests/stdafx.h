@@ -11,5 +11,7 @@
 #include <tchar.h>
 #include "gtest\gtest.h"
 #include <algorithm>
-
+#include <string>
+#include <iostream>
+#include <memory>
 // TODO: reference additional headers your program requires here

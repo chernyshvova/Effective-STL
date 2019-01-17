@@ -6,7 +6,7 @@ namespace force
     {
     public:
         ForceRemover();
-        ForceRemover(std::string::iterator c, const std::string& skipedText);
+        ForceRemover(std::string::iterator c);
         bool operator==(const std::string::iterator& it);
         bool operator!=(const ForceRemover& it);
         char operator*();
@@ -15,7 +15,6 @@ namespace force
         ForceRemover& operator+=(int);
 
     private:
-        std::string::iterator m_cursor;
         std::string m_skipedText;
     };
 }

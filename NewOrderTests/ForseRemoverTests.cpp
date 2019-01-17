@@ -15,7 +15,7 @@ public:
     ForseRemoverTests() {}
     void SetUp()
     {
-        m_remover = force::ForceRemover(s_testsData.begin(), s_skepedText);
+        m_remover = force::ForceRemover(s_testsData.begin());
     }
 
 protected:
@@ -54,7 +54,9 @@ TEST_F(ForseRemoverTests, RemoverskipsSeveralSkipedChars)
 
 TEST(ForseRemoverTest, RemoverskipsSeveralSkipedChars)
 {
-    force::ForceRemover remover(s_testsData.begin(), "force");
-    std::remove((std::string::iterator)remover, s_testsData.end(), '#');
+    std::string test = s_testsData;
+    std::shared_ptr<std::string::iterator>  remover(new force::ForceRemover(test.begin()));
+    test.erase(*remover.get(), test.end());
     
+    EXPECT_EQ("n  but ki", test);
 }

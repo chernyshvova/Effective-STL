@@ -2,36 +2,37 @@
 #include "ForseRemover.h"
 
 force::ForceRemover::ForceRemover() {}
-force::ForceRemover::ForceRemover(std::string::iterator cursor, const std::string& skipedText) :
-    m_cursor(cursor)
-    , m_skipedText(skipedText)
+force::ForceRemover::ForceRemover(std::string::iterator cursor) :
+    std::string::iterator(cursor)
+    , m_skipedText("force")
 {}
 
 bool force::ForceRemover::operator==(const std::string::iterator& it)
 {
-    return m_cursor == it;
+    
+    return *std::string::iterator::_Ptr == *it;
 }
 
 bool force::ForceRemover::operator!=(const ForceRemover& it)
 {
-    return !(m_cursor == it.m_cursor);
+    return !(*this == it);
 }
 
 char force::ForceRemover::operator*()
 {
-    return *m_cursor;
+    return *std::string::iterator::_Ptr;
 }
 
 
 
 force::ForceRemover& force::ForceRemover::operator++()
 {
-    ++m_cursor;
+    ++std::string::iterator::_Ptr;
     for (char skip : m_skipedText)
     {
-        if (skip == *m_cursor)
+        if (skip == *std::string::iterator::_Ptr)
         {
-            ++m_cursor;
+            ++std::string::iterator::_Ptr;
         }
     }
 
@@ -47,6 +48,6 @@ force::ForceRemover& force::ForceRemover::operator++(int)
 force::ForceRemover & force::ForceRemover::operator+=(int count)
 {
 
-    m_cursor += count;
+    std::string::iterator::_Ptr += count;
     return *this;
 }
