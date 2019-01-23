@@ -2,40 +2,45 @@
 #include "ForseRemover.h"
 
 force::ForceRemover::ForceRemover() {}
-force::ForceRemover::ForceRemover(std::string::iterator cursor) :
-    std::string::iterator(cursor)
+force::ForceRemover::ForceRemover(ForceIterator cursor) :
+    ForceIterator(cursor)
     , m_skipedText("force")
 {}
 
-bool force::ForceRemover::operator==(const std::string::iterator& it)
+bool force::ForceRemover::operator==(ForceIterator& it)const
 {
     
-    return *std::string::iterator::_Ptr == *it;
+    return ForceIterator::_Ptr == it._Ptr;
 }
 
 bool force::ForceRemover::operator!=(const ForceRemover& it)
 {
-    return !(*this == it);
+    return !(*this->_Ptr == *it._Ptr);
 }
 
 char force::ForceRemover::operator*()
 {
-    return *std::string::iterator::_Ptr;
+    return *ForceIterator::_Ptr;
 }
-
-
 
 force::ForceRemover& force::ForceRemover::operator++()
 {
-    ++std::string::iterator::_Ptr;
+    ++ForceIterator::_Ptr;
     for (char skip : m_skipedText)
     {
-        if (skip == *std::string::iterator::_Ptr)
+        if (skip == *ForceIterator::_Ptr)
         {
-            ++std::string::iterator::_Ptr;
+            ++ForceIterator::_Ptr;
         }
     }
 
+    return *this;
+}
+
+force::ForceRemover & force::ForceRemover::operator+(const ForceRemover & rlvar)
+{
+    int a = 0;
+    a;
     return *this;
 }
 
@@ -47,7 +52,54 @@ force::ForceRemover& force::ForceRemover::operator++(int)
 
 force::ForceRemover & force::ForceRemover::operator+=(int count)
 {
-
-    std::string::iterator::_Ptr += count;
+    ForceIterator::_Ptr += count;
     return *this;
+}
+
+force::ForceRemover & force::ForceRemover::operator--(int)
+{
+    int a = 0;
+    a;
+    return *this;
+}
+
+force::ForceRemover & force::ForceRemover::operator-=(int)
+{
+    int a = 0;
+    a;
+    return *this;
+}
+
+force::ForceRemover & force::ForceRemover::operator[](int)
+{
+    int a = 0;
+    a;
+    return *this;
+}
+
+force::ForceRemover & force::ForceRemover::operator-(const ForceIterator & other)
+{
+    int a = 0;
+    a;
+    return *this;
+}
+
+bool force::ForceRemover::operator>(const ForceIterator & other) const
+{
+    return false;
+}
+
+bool force::ForceRemover::operator<=(const ForceIterator & other) const
+{
+    return false;
+}
+
+bool force::ForceRemover::operator>=(const _Myiter & _Right) const
+{
+    return false;
+}
+
+bool force::ForceRemover::operator<(const ForceIterator & other)const
+{
+    return ForceIterator::_Ptr < other._Ptr;
 }

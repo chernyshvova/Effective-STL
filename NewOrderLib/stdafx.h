@@ -10,5 +10,7 @@
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 
 #include <iterator>
-
+#include <algorithm>
+#include <string>
+#include <iostream>
 // TODO: reference additional headers your program requires here

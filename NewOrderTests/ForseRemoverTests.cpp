@@ -1,8 +1,5 @@
 #include "stdafx.h"
 #include "ForseRemover.h"
-#include <algorithm>
-#include <string>
-#include <iostream>
 
 namespace {
     std::string s_testsData = "no force but cookie";
@@ -55,8 +52,15 @@ TEST_F(ForseRemoverTests, RemoverskipsSeveralSkipedChars)
 TEST(ForseRemoverTest, RemoverskipsSeveralSkipedChars)
 {
     std::string test = s_testsData;
-    std::shared_ptr<std::string::iterator>  remover(new force::ForceRemover(test.begin()));
-    test.erase(*remover.get(), test.end());
+
+    force::ForceRemover remover(test.begin());
+
+    //test.erase(std::remove(*remover.get(), test.end(), ' '),
+        //test.end());
+    std::cout << test << '\n';
+    //auto res = std::remove(test.begin(), test.end(), 'f');
+    auto res2 = std::remove<ForceIterator>(remover, test.end(), '1');
+    //test.erase(force::ForceRemover(test.begin()), test.end());
     
     EXPECT_EQ("n  but ki", test);
 }
