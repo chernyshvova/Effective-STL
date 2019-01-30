@@ -19,6 +19,33 @@ protected:
     force::ForceRemover m_remover;
 };
 
+TEST_F(ForseRemoverTests, GetValueAndReturnChar)
+{
+    EXPECT_EQ('n', *m_remover);
+}
+
+TEST_F(ForseRemoverTests, CompareWithIteratorAndReturnTrue)
+{
+    EXPECT_TRUE(m_remover == s_testsData.begin());
+}
+
+TEST_F(ForseRemoverTests, CompareWithIteratorAndReturnFalse)
+{
+    force::ForceRemover remover(s_testsData.begin());
+    EXPECT_FALSE(remover == s_testsData.end());
+}
+
+TEST_F(ForseRemoverTests, CompareWithIteratorAndNotEQuealsAndReturnFalse)
+{
+    EXPECT_FALSE(m_remover != s_testsData.begin());
+}
+
+TEST_F(ForseRemoverTests, CompareWithIteratorAndNotEQuealsAndReturnTrue)
+{
+    force::ForceRemover remover(s_testsData.begin());
+    EXPECT_TRUE(remover != s_testsData.end());
+}
+
 TEST_F(ForseRemoverTests, CreateRemoveIteratorInstanceIsnoNull)
 {
     EXPECT_NE(nullptr, &m_remover);
@@ -32,35 +59,37 @@ TEST_F(ForseRemoverTests, CursorReturnsChar)
 TEST_F(ForseRemoverTests, CursorMovedForward)
 {
     m_remover++;
-    EXPECT_EQ(' ', *m_remover);
+    EXPECT_EQ('o', *m_remover);
 }
 
-TEST_F(ForseRemoverTests, RemoverskipsOneCharO)
+TEST_F(ForseRemoverTests, CompareWithLessStringIteratorAndReturnTrue)
 {
-    m_remover++;
-    EXPECT_NE('o', *m_remover);
+    EXPECT_TRUE(m_remover < s_testsData.end());
 }
 
 TEST_F(ForseRemoverTests, RemoverskipsSeveralSkipedChars)
 {
     m_remover++;
-    EXPECT_EQ(' ', *m_remover);
+    EXPECT_EQ('o', *m_remover);
     m_remover++;
     EXPECT_EQ(' ', *m_remover);
 }
 
 TEST(ForseRemoverTest, RemoverskipsSeveralSkipedChars)
 {
-    std::string test = s_testsData;
+    std::string expect = "n  but ki";
+    std::string res;
+    res.resize(expect.size());
+    std::copy<force::ForceRemover>(force::ForceRemover(s_testsData.begin()), s_testsData.end(),
+        (force::ForceRemover)res.begin());
 
-    force::ForceRemover remover(test.begin());
+    EXPECT_EQ(expect, res);
+}
 
-    //test.erase(std::remove(*remover.get(), test.end(), ' '),
-        //test.end());
-    std::cout << test << '\n';
-    //auto res = std::remove(test.begin(), test.end(), 'f');
-    auto res2 = std::remove<ForceIterator>(remover, test.end(), '1');
-    //test.erase(force::ForceRemover(test.begin()), test.end());
-    
-    EXPECT_EQ("n  but ki", test);
+TEST(ForseRemoverTest, RemoverskipsSeveralBesidesUsedText)
+{
+    //std::string expect = "n  but ki";
+    //std::string noforce_text(force::ForceRemover(s_testsData.begin()), force::ForceRemover(s_testsData.end()));
+
+    //EXPECT_EQ(expect, noforce_text);
 }
