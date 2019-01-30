@@ -1,25 +1,6 @@
 #include "stdafx.h"
 #include "ForseRemover.h"
-
-namespace {
-    void filterText(force::ForceRemover& it, const std::string& text, bool backwards = false)
-    {
-        bool exit = true;
-        for (char sym : text)
-        {
-            if (*it._Ptr == sym)
-            {
-                it._Ptr++;
-                exit = false;
-            }  
-        }
-        if (!exit)
-        {
-            filterText(it, text);
-        }
-    }
-}
-
+#include "ForceUtils.h"
 
 force::ForceRemover::ForceRemover() {}
 force::ForceRemover::ForceRemover(ForceIterator& cursor) :
@@ -61,7 +42,7 @@ force::ForceRemover & force::ForceRemover::operator=(ForceIterator& rval)
 force::ForceRemover& force::ForceRemover::operator++()
 {
     ForceIterator::_Ptr++;
-    filterText(*this, m_skipedText);
+    force::utils::FilterText(*this, m_skipedText);
     return *this;
 }
 

@@ -1,6 +1,6 @@
 #pragma once
+#include "ForceUtils.h"
 
-using ForceIterator = std::_String_iterator<std::_String_val<std::_Simple_types<char>>>;
 namespace force
 {
     class ForceIgnorer: public ForceIterator

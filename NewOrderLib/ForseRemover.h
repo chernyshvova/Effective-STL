@@ -1,7 +1,4 @@
 #pragma once
-
-
-
 namespace force
 {
     using ForceIterator = std::_String_iterator<std::_String_val<std::_Simple_types<char>>>;
