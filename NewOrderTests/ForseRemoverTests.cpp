@@ -85,11 +85,3 @@ TEST(ForseRemoverTest, RemoverskipsSeveralSkipedChars)
 
     EXPECT_EQ(expect, res);
 }
-
-TEST(ForseRemoverTest, RemoverskipsSeveralBesidesUsedText)
-{
-    //std::string expect = "n  but ki";
-    //std::string noforce_text(force::ForceRemover(s_testsData.begin()), force::ForceRemover(s_testsData.end()));
-
-    //EXPECT_EQ(expect, noforce_text);
-}
