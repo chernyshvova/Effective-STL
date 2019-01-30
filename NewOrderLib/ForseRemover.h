@@ -1,14 +1,16 @@
 #pragma once
 
-using ForceIterator = std::_String_iterator<std::_String_val<std::_Simple_types<char>>>;
+
 
 namespace force
 {
+    using ForceIterator = std::_String_iterator<std::_String_val<std::_Simple_types<char>>>;
+
     class ForceRemover : public ForceIterator
     {
     public:
         ForceRemover();
-        ForceRemover(ForceIterator& c);
+        ForceRemover(ForceIterator&);
         bool operator==(ForceIterator& it)const;
         bool operator==(ForceRemover& it)const;
         bool operator==(const char)const;

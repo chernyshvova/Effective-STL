@@ -27,12 +27,18 @@
     <ClInclude Include="ForseRemover.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ForceIgnorer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ForseRemover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ignorer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
